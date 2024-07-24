@@ -221,6 +221,32 @@ namespace SteamLibrary
             }
         }
 
+        private void SaveKeys()
+        {
+            var keys = new ApiKeyInfo
+            {
+                MainAccount = Settings.RutnimeApiKey
+            };
+
+            if (Settings.AdditionalAccounts.HasItems())
+            {
+                foreach (var account in Settings.AdditionalAccounts.Where(a => !a.AccountId.IsNullOrWhiteSpace() && !a.RutnimeApiKey.IsNullOrWhiteSpace()))
+                {
+                    if (!keys.Accounts.ContainsKey(account.AccountId))
+                    {
+                        keys.Accounts.Add(account.AccountId, account.RutnimeApiKey);
+                    }
+                }
+            }
+
+            FileSystem.PrepareSaveFile(ApiKeysPath);
+            Encryption.EncryptToFile(
+                ApiKeysPath,
+                Serialization.ToJson(keys),
+                Encoding.UTF8,
+                WindowsIdentity.GetCurrent().User.Value);
+        }
+
         private void LoadToken()
         {
             if (!FileSystem.FileExists(TokenPath))
@@ -254,32 +280,6 @@ namespace SteamLibrary
             Encryption.EncryptToFile(
                 TokenPath,
                 Serialization.ToJson(token),
-                Encoding.UTF8,
-                WindowsIdentity.GetCurrent().User.Value);
-        }
-
-        private void SaveKeys()
-        {
-            var keys = new ApiKeyInfo
-            {
-                MainAccount = Settings.RutnimeApiKey
-            };
-
-            if (Settings.AdditionalAccounts.HasItems())
-            {
-                foreach (var account in Settings.AdditionalAccounts.Where(a => !a.AccountId.IsNullOrWhiteSpace() && !a.RutnimeApiKey.IsNullOrWhiteSpace()))
-                {
-                    if (!keys.Accounts.ContainsKey(account.AccountId))
-                    {
-                        keys.Accounts.Add(account.AccountId, account.RutnimeApiKey);
-                    }
-                }
-            }
-
-            FileSystem.PrepareSaveFile(ApiKeysPath);
-            Encryption.EncryptToFile(
-                ApiKeysPath,
-                Serialization.ToJson(keys),
                 Encoding.UTF8,
                 WindowsIdentity.GetCurrent().User.Value);
         }
