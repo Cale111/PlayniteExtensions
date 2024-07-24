@@ -81,4 +81,5 @@
   <sys:String x:Key="LOCSteamImportSteamDeckCompatibilityAs">Import Steam Deck compatibility as a</sys:String>
   <sys:String x:Key="LOCSteamImportFamilySharedGames">Import family shared games</sys:String>
   <sys:String x:Key="LOCSteamAccessToken">Access Token</sys:String>
+  <sys:String x:Key="LOCSteamNoFamilyGroupError">Cannot import family shared games, not part of any Steam family</sys:String>
 </ResourceDictionary>

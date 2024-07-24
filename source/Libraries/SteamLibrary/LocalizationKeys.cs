@@ -321,5 +321,17 @@ namespace System
         /// Import Steam Deck compatibility as a
         /// </summary>
         public const string SteamImportSteamDeckCompatibilityAs = "LOCSteamImportSteamDeckCompatibilityAs";
+        /// <summary>
+        /// Import family shared games
+        /// </summary>
+        public const string SteamImportFamilySharedGames = "LOCSteamImportFamilySharedGames";
+        /// <summary>
+        /// Access Token
+        /// </summary>
+        public const string SteamAccessToken = "LOCSteamAccessToken";
+        /// <summary>
+        /// Cannot import family shared games, not part of any Steam family
+        /// </summary>
+        public const string SteamNoFamilyGroupError = "LOCSteamNoFamilyGroupError";
     }
 }

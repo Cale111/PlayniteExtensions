@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -471,6 +472,30 @@ namespace SteamLibrary
             }
         }
 
+        internal GetOwnedGamesResult GetFamilySharedGames(ulong userId, string accessToken)
+        {
+            var familyGroupIdUrl = @"https://api.steampowered.com/IFamilyGroupsService/GetFamilyGroupForUser/v1?access_token={0}&spoof_steamid=";
+            var sharedLibraryUrl = @"https://api.steampowered.com/IFamilyGroupsService/GetSharedLibraryApps/v1/?access_token={0}&family_groupid={1}&include_own=true&include_excluded=false&include_free=false&language=english&max_apps=&include_non_games=true&steamid={2}";
+
+            using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
+            {
+                var familyGroupInformation = Serialization.FromJson<FamilyGroupInformation>(webClient.DownloadString(string.Format(familyGroupIdUrl, accessToken)));
+
+                if (!familyGroupInformation.response.is_not_member_of_any_group)
+                {
+                    var stringLibrary = webClient.DownloadString(string.Format(sharedLibraryUrl, accessToken, familyGroupInformation.response.family_groupid, userId))
+                        .Replace("\"apps\"", "\"games\"")
+                        .Replace("\"rt_playtime\"", "\"playtime_forever\"")
+                        .Replace("\"img_icon_hash\"", "\"img_icon_url\"");
+                    return Serialization.FromJson<GetOwnedGamesResult>(stringLibrary);
+                }
+                else
+                {
+                    throw new Exception(PlayniteApi.Resources.GetString(LOC.SteamNoFamilyGroupError));
+                }
+            }
+        }
+
         internal List<GameMetadata> GetLibraryGames(ulong userId, List<GetOwnedGamesResult.Game> ownedGames, bool includePlayTime = true)
         {
             if (ownedGames == null)
@@ -645,6 +670,25 @@ namespace SteamLibrary
                 try
                 {
                     var libraryGames = GetLibraryGames(SettingsViewModel.Settings);
+                    if (SettingsViewModel.Settings.ImportFamilySharedGames)
+                    {
+                        try
+                        {
+                            var familySharedGames = GetFamilySharedGames(ulong.Parse(SettingsViewModel.Settings.UserId), SettingsViewModel.Settings.RutnimeAccessToken);
+                            var parsedGames = GetLibraryGames(ulong.Parse(SettingsViewModel.Settings.UserId), familySharedGames.response.games);
+                            foreach (var familySharedGame in parsedGames)
+                            {
+                                if (!libraryGames.Any(a => a.GameId == familySharedGame.GameId))
+                                {
+                                    libraryGames.Add(familySharedGame);
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            throw new Exception($"Failed to import family shared games.");
+                        }
+                    }
                     if (SettingsViewModel.Settings.AdditionalAccounts.HasItems())
                     {
                         foreach (var account in SettingsViewModel.Settings.AdditionalAccounts)
