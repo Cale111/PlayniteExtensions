@@ -41,7 +41,9 @@ namespace SteamLibrary
     public class SteamLibrarySettings : SharedSteamSettings
     {
         private bool isPrivateAccount;
+        private bool importFamilySharedGames;
         private string apiKey = string.Empty;
+        private string accessToken = string.Empty;
 
         public int Version { get; set; }
         public bool ImportInstalledGames { get; set; } = true;
@@ -51,18 +53,25 @@ namespace SteamLibrary
         public bool IncludeFreeSubGames { get; set; } = false;
         public bool ShowFriendsButton { get; set; } = true;
         public bool IsPrivateAccount { get => isPrivateAccount; set => SetValue(ref isPrivateAccount, value); }
+        public bool ImportFamilySharedGames { get => importFamilySharedGames; set => SetValue(ref importFamilySharedGames, value); }
         public bool IgnoreOtherInstalled { get; set; }
         public ObservableCollection<AdditionalSteamAcccount> AdditionalAccounts { get; set; } = new ObservableCollection<AdditionalSteamAcccount>();
         public bool ShowSteamLaunchMenuInDesktopMode { get; set; } = true;
         public bool ShowSteamLaunchMenuInFullscreenMode { get; set; } = false;
         [Obsolete] public string ApiKey { get; set; }
         [DontSerialize] public string RutnimeApiKey { get => apiKey; set => SetValue(ref apiKey, value); }
+        [DontSerialize] public string RutnimeAccessToken { get => accessToken; set => SetValue(ref accessToken, value); }
     }
 
     public class ApiKeyInfo
     {
         public string MainAccount { get; set; }
         public Dictionary<string, string> Accounts { get; set; } = new Dictionary<string, string>();
+    }
+
+    public class TokenInfo
+    {
+        public string Token { get; set; }
     }
 
     public class SteamLibrarySettingsViewModel : SharedSteamSettingsViewModel<SteamLibrarySettings, SteamLibrary>
@@ -180,6 +189,7 @@ namespace SteamLibrary
 
             Settings.Version = 2;
             LoadKeys();
+            LoadToken();
         }
 
         private void LoadKeys()
@@ -209,6 +219,43 @@ namespace SteamLibrary
             {
                 Logger.Error(e, "Failed to load Steam API keys.");
             }
+        }
+
+        private void LoadToken()
+        {
+            if (!FileSystem.FileExists(TokenPath))
+            {
+                return;
+            }
+
+            try
+            {
+                var str = Encryption.DecryptFromFile(
+                    TokenPath,
+                    Encoding.UTF8,
+                    WindowsIdentity.GetCurrent().User.Value);
+                var token = Serialization.FromJson<TokenInfo>(str);
+                Settings.RutnimeAccessToken = token.Token;
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e, "Failed to load Steam API access token.");
+            }
+        }
+
+        private void SaveToken()
+        {
+            var token = new TokenInfo
+            {
+                Token = Settings.RutnimeAccessToken
+            };
+
+            FileSystem.PrepareSaveFile(TokenPath);
+            Encryption.EncryptToFile(
+                TokenPath,
+                Serialization.ToJson(token),
+                Encoding.UTF8,
+                WindowsIdentity.GetCurrent().User.Value);
         }
 
         private void SaveKeys()
@@ -256,6 +303,11 @@ namespace SteamLibrary
             if (Settings.IsPrivateAccount && Settings.RutnimeApiKey.IsNullOrEmpty())
             {
                 errors = new List<string>{ "Steam API key must be specified when using private accounts!" };
+                return false;
+            }
+            if (Settings.ImportFamilySharedGames && Settings.RutnimeAccessToken.IsNullOrEmpty())
+            {
+                errors = new List<string> { "Steam access token must be specified when importing family shared games!" };
                 return false;
             }
 
@@ -323,6 +375,7 @@ namespace SteamLibrary
         public override void BeginEdit()
         {
             base.BeginEdit();
+            EditingClone.RutnimeAccessToken = Settings.RutnimeAccessToken;
             EditingClone.RutnimeApiKey = Settings.RutnimeApiKey;
             for (int i = 0; i < Settings.AdditionalAccounts.Count; i++)
             {
@@ -342,6 +395,7 @@ namespace SteamLibrary
         {
             Settings.PropertyChanged -= Settings_PropertyChanged;
             SaveKeys();
+            SaveToken();
             base.EndEdit();
             Plugin.TopPanelFriendsButton.Visible = Settings.ShowFriendsButton;
         }

@@ -118,6 +118,22 @@
                     </Hyperlink>
                         </TextBlock>
                     </StackPanel>
+
+                    <CheckBox Content="{DynamicResource LOCSteamImportFamilySharedGames}"
+                               IsChecked="{Binding Settings.ImportFamilySharedGames}"
+                               DockPanel.Dock="Top" Margin="0,15,0,0"
+                               Name="CheckSteamImportFamilyShared" VerticalAlignment="Center"/>
+                    <StackPanel DockPanel.Dock="Top" Margin="25,10,5,5" Orientation="Horizontal"
+                               IsEnabled="{Binding IsChecked, ElementName=CheckSteamImportFamilyShared}">
+                               <TextBlock Text="{DynamicResource LOCSteamAccessToken}" VerticalAlignment="Center"/>
+                               <PasswordBox steam:PasswordBoxAssistant.BindPassword="True"
+                                    steam:PasswordBoxAssistant.BoundPassword="{Binding Settings.RutnimeAccessToken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=150}"
+                                    Width="300" VerticalAlignment="Center" Margin="10,0,10,0" />
+                        <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center">
+                        </TextBlock>
+                    </StackPanel>
+
+
                 </DockPanel>
 
                 <TextBlock VerticalAlignment="Center" Margin="0,12,0,0">

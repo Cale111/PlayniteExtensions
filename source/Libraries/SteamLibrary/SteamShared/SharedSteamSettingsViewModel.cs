@@ -17,10 +17,12 @@ namespace SteamLibrary.SteamShared
         private ObservableCollection<TagInfo> blacklistedTags;
         private string fixedTagCountString;
         internal readonly string ApiKeysPath;
+        internal readonly string TokenPath;
 
         protected SharedSteamSettingsViewModel(TPlugin plugin, IPlayniteAPI playniteApi) : base(plugin, playniteApi)
         {
             ApiKeysPath = Path.Combine(plugin.GetPluginUserDataPath(), "keys.dat");
+            TokenPath = Path.Combine(plugin.GetPluginUserDataPath(), "token.dat");
             var savedSettings = LoadSavedSettings();
             if (savedSettings != null)
             {
