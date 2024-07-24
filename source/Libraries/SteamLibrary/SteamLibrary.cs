@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -495,7 +496,7 @@ namespace SteamLibrary
             }
         }
 
-        internal List<GameMetadata> GetLibraryGames(ulong userId, List<GetOwnedGamesResult.Game> ownedGames, bool includePlayTime = true, bool familyShared = false)
+        internal List<GameMetadata> GetLibraryGames(ulong userId, List<GetOwnedGamesResult.Game> ownedGames, bool includePlayTime = true)
         {
             if (ownedGames == null)
             {
@@ -540,11 +541,6 @@ namespace SteamLibrary
                 if (lastActivity != null && lastActivity.TryGetValue(newGame.GameId, out var gameLastActivity) && newGame.Playtime > 0)
                 {
                     newGame.LastActivity = gameLastActivity;
-                }
-
-                if (familyShared)
-                {
-                    newGame.Tags = new HashSet<MetadataProperty> { new MetadataNameProperty("Family Shared") };
                 }
 
                 games.Add(newGame);
@@ -679,7 +675,7 @@ namespace SteamLibrary
                         try
                         {
                             var familySharedGames = GetFamilySharedGames(ulong.Parse(SettingsViewModel.Settings.UserId), SettingsViewModel.Settings.RutnimeAccessToken);
-                            var parsedGames = GetLibraryGames(ulong.Parse(SettingsViewModel.Settings.UserId), familySharedGames.response.games, true, true);
+                            var parsedGames = GetLibraryGames(ulong.Parse(SettingsViewModel.Settings.UserId), familySharedGames.response.games);
                             foreach (var familySharedGame in parsedGames)
                             {
                                 if (!libraryGames.Any(a => a.GameId == familySharedGame.GameId))
