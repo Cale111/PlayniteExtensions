@@ -16,6 +16,7 @@ namespace SteamLibrary.Models
             public string img_icon_url;
             public string img_logo_url;
             public bool has_community_visible_stats;
+            public int app_type;
         }
 
         public class Response

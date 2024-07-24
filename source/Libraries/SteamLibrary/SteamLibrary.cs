@@ -523,6 +523,11 @@ namespace SteamLibrary
                 {
                     continue;
                 }
+                // Ignore family shared apps that aren't games or software, like soundtracks or tools
+                if (game.app_type >= 3)
+                {
+                    continue;
+                }
 
                 var newGame = new GameMetadata()
                 {
