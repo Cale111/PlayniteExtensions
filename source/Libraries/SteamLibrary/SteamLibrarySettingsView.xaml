@@ -149,7 +149,6 @@
                                   Visibility="{Binding IsFirstRunUse, Converter={pcon:InvertedBooleanToVisibilityConverter}}"
                                   Content="{DynamicResource LOCSteamImportFreeSubGames}"/>
                     </StackPanel>
-                </StackPanel>
                 <TextBlock VerticalAlignment="Center" Margin="0,15,0,0">
                     <Hyperlink NavigateUri="https://github.com/JosefNemec/PlayniteExtensions/wiki/Steam-troubleshooting"
                                 Command="{x:Static pcmd:GlobalCommands.NavigateUrlCommand}"
