@@ -38,6 +38,10 @@ namespace System
         /// </summary>
         public const string AmazonAuthenticateLabel = "LOCAmazonAuthenticateLabel";
         /// <summary>
+        /// Alternative authentication
+        /// </summary>
+        public const string AmazonAuthenticateAlternativeLabel = "LOCAmazonAuthenticateAlternativeLabel";
+        /// <summary>
         /// Start games directly without running official client
         /// </summary>
         public const string AmazonSettingsStartGameDirectly = "LOCAmazonSettingsStartGameDirectly";
@@ -77,6 +81,10 @@ namespace System
         /// Account ID
         /// </summary>
         public const string AmazonAccountID = "LOCAmazonAccountID";
+        /// <summary>
+        /// Get account ID
+        /// </summary>
+        public const string AmazonGetAccountID = "LOCAmazonGetAccountID";
         /// <summary>
         /// Metadata language:
         /// </summary>

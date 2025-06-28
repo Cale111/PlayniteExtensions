@@ -38,6 +38,10 @@ namespace System
         /// </summary>
         public const string OriginAuthenticateLabel = "LOCOriginAuthenticateLabel";
         /// <summary>
+        /// Alternative authentication
+        /// </summary>
+        public const string OriginAuthenticateAlternativeLabel = "LOCOriginAuthenticateAlternativeLabel";
+        /// <summary>
         /// Start games directly without running official client
         /// </summary>
         public const string OriginSettingsStartGameDirectly = "LOCOriginSettingsStartGameDirectly";
@@ -77,6 +81,10 @@ namespace System
         /// Account ID
         /// </summary>
         public const string OriginAccountID = "LOCOriginAccountID";
+        /// <summary>
+        /// Get account ID
+        /// </summary>
+        public const string OriginGetAccountID = "LOCOriginGetAccountID";
         /// <summary>
         /// Metadata language:
         /// </summary>

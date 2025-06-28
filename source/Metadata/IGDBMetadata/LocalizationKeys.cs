@@ -38,6 +38,10 @@ namespace System
         /// </summary>
         public const string IGDBAuthenticateLabel = "LOCIGDBAuthenticateLabel";
         /// <summary>
+        /// Alternative authentication
+        /// </summary>
+        public const string IGDBAuthenticateAlternativeLabel = "LOCIGDBAuthenticateAlternativeLabel";
+        /// <summary>
         /// Start games directly without running official client
         /// </summary>
         public const string IGDBSettingsStartGameDirectly = "LOCIGDBSettingsStartGameDirectly";
@@ -77,6 +81,10 @@ namespace System
         /// Account ID
         /// </summary>
         public const string IGDBAccountID = "LOCIGDBAccountID";
+        /// <summary>
+        /// Get account ID
+        /// </summary>
+        public const string IGDBGetAccountID = "LOCIGDBGetAccountID";
         /// <summary>
         /// Metadata language:
         /// </summary>

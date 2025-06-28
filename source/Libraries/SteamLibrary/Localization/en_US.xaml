@@ -7,6 +7,7 @@
   <sys:String x:Key="LOCSteamNotLoggedIn">Requires authentication</sys:String>
   <sys:String x:Key="LOCSteamNotLoggedInError">Failed to authenticate user.</sys:String>
   <sys:String x:Key="LOCSteamAuthenticateLabel">Authenticate</sys:String>
+  <sys:String x:Key="LOCSteamAuthenticateAlternativeLabel">Alternative authentication</sys:String>
   <sys:String x:Key="LOCSteamSettingsStartGameDirectly">Start games directly without running official client</sys:String>
   <sys:String x:Key="LOCSteamTroubleShootingAccountLink">Troubleshooting account sync issues</sys:String>
   <sys:String x:Key="LOCSteamTroubleShootingIssues">Troubleshooting issues</sys:String>
@@ -17,6 +18,7 @@
   <sys:String x:Key="LOCSteamStartUsingClient">Start using {0} client</sys:String>
   <sys:String x:Key="LOCSteamImportPlaytime">Import play time</sys:String>
   <sys:String x:Key="LOCSteamAccountID">Account ID</sys:String>
+  <sys:String x:Key="LOCSteamGetAccountID">Get account ID</sys:String>
   <sys:String x:Key="LOCSteamMetadataLanguageLabel">Metadata language:</sys:String>
   <!--Steam-->
   <sys:String x:Key="LOCSettingsWhatsSteamName">What's my account name?</sys:String>
@@ -82,4 +84,5 @@
   <sys:String x:Key="LOCSteamImportFamilySharedGames">Import family shared games</sys:String>
   <sys:String x:Key="LOCSteamAccessToken">Access Token</sys:String>
   <sys:String x:Key="LOCSteamNoFamilyGroupError">Cannot import family shared games, not part of any Steam family</sys:String>
+  <sys:String x:Key="LOCSteamWebVsApiLogin">Should I use Web or API login?</sys:String>
 </ResourceDictionary>

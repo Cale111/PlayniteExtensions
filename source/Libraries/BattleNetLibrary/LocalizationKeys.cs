@@ -38,6 +38,10 @@ namespace System
         /// </summary>
         public const string BattleNetAuthenticateLabel = "LOCBattleNetAuthenticateLabel";
         /// <summary>
+        /// Alternative authentication
+        /// </summary>
+        public const string BattleNetAuthenticateAlternativeLabel = "LOCBattleNetAuthenticateAlternativeLabel";
+        /// <summary>
         /// Start games directly without running official client
         /// </summary>
         public const string BattleNetSettingsStartGameDirectly = "LOCBattleNetSettingsStartGameDirectly";
@@ -77,6 +81,10 @@ namespace System
         /// Account ID
         /// </summary>
         public const string BattleNetAccountID = "LOCBattleNetAccountID";
+        /// <summary>
+        /// Get account ID
+        /// </summary>
+        public const string BattleNetGetAccountID = "LOCBattleNetGetAccountID";
         /// <summary>
         /// Metadata language:
         /// </summary>

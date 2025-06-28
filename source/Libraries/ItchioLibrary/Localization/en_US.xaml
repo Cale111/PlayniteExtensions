@@ -7,6 +7,7 @@
   <sys:String x:Key="LOCitchioNotLoggedIn">Requires authentication</sys:String>
   <sys:String x:Key="LOCitchioNotLoggedInError">Failed to authenticate user.</sys:String>
   <sys:String x:Key="LOCitchioAuthenticateLabel">Authenticate</sys:String>
+  <sys:String x:Key="LOCitchioAuthenticateAlternativeLabel">Alternative authentication</sys:String>
   <sys:String x:Key="LOCitchioSettingsStartGameDirectly">Start games directly without running official client</sys:String>
   <sys:String x:Key="LOCitchioTroubleShootingAccountLink">Troubleshooting account sync issues</sys:String>
   <sys:String x:Key="LOCitchioTroubleShootingIssues">Troubleshooting issues</sys:String>
@@ -17,6 +18,7 @@
   <sys:String x:Key="LOCitchioStartUsingClient">Start using {0} client</sys:String>
   <sys:String x:Key="LOCitchioImportPlaytime">Import play time</sys:String>
   <sys:String x:Key="LOCitchioAccountID">Account ID</sys:String>
+  <sys:String x:Key="LOCitchioGetAccountID">Get account ID</sys:String>
   <sys:String x:Key="LOCitchioMetadataLanguageLabel">Metadata language:</sys:String>
   <!--itch.io-->
   <sys:String x:Key="LOCItchioSignInNotif">itch.io will be launched. Please sign in and then close this message.</sys:String>

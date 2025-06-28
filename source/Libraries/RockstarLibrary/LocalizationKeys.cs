@@ -38,6 +38,10 @@ namespace System
         /// </summary>
         public const string RockstarAuthenticateLabel = "LOCRockstarAuthenticateLabel";
         /// <summary>
+        /// Alternative authentication
+        /// </summary>
+        public const string RockstarAuthenticateAlternativeLabel = "LOCRockstarAuthenticateAlternativeLabel";
+        /// <summary>
         /// Start games directly without running official client
         /// </summary>
         public const string RockstarSettingsStartGameDirectly = "LOCRockstarSettingsStartGameDirectly";
@@ -78,8 +82,16 @@ namespace System
         /// </summary>
         public const string RockstarAccountID = "LOCRockstarAccountID";
         /// <summary>
+        /// Get account ID
+        /// </summary>
+        public const string RockstarGetAccountID = "LOCRockstarGetAccountID";
+        /// <summary>
         /// Metadata language:
         /// </summary>
         public const string RockstarMetadataLanguageLabel = "LOCRockstarMetadataLanguageLabel";
+        /// <summary>
+        /// Rockstar plugin currently only imports installed games. There is no way to link an account to import all games.
+        /// </summary>
+        public const string RockstarSettingsNotice = "LOCRockstarSettingsNotice";
     }
 }

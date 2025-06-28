@@ -38,6 +38,10 @@ namespace System
         /// </summary>
         public const string SteamAuthenticateLabel = "LOCSteamAuthenticateLabel";
         /// <summary>
+        /// Alternative authentication
+        /// </summary>
+        public const string SteamAuthenticateAlternativeLabel = "LOCSteamAuthenticateAlternativeLabel";
+        /// <summary>
         /// Start games directly without running official client
         /// </summary>
         public const string SteamSettingsStartGameDirectly = "LOCSteamSettingsStartGameDirectly";
@@ -77,6 +81,10 @@ namespace System
         /// Account ID
         /// </summary>
         public const string SteamAccountID = "LOCSteamAccountID";
+        /// <summary>
+        /// Get account ID
+        /// </summary>
+        public const string SteamGetAccountID = "LOCSteamGetAccountID";
         /// <summary>
         /// Metadata language:
         /// </summary>
@@ -333,5 +341,8 @@ namespace System
         /// Cannot import family shared games, not part of any Steam family
         /// </summary>
         public const string SteamNoFamilyGroupError = "LOCSteamNoFamilyGroupError";
+        /// Should I use Web or API login?
+        /// </summary>
+        public const string SteamWebVsApiLogin = "LOCSteamWebVsApiLogin";
     }
 }

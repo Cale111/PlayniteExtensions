@@ -7,6 +7,7 @@
   <sys:String x:Key="LOCIGDBNotLoggedIn">Requires authentication</sys:String>
   <sys:String x:Key="LOCIGDBNotLoggedInError">Failed to authenticate user.</sys:String>
   <sys:String x:Key="LOCIGDBAuthenticateLabel">Authenticate</sys:String>
+  <sys:String x:Key="LOCIGDBAuthenticateAlternativeLabel">Alternative authentication</sys:String>
   <sys:String x:Key="LOCIGDBSettingsStartGameDirectly">Start games directly without running official client</sys:String>
   <sys:String x:Key="LOCIGDBTroubleShootingAccountLink">Troubleshooting account sync issues</sys:String>
   <sys:String x:Key="LOCIGDBTroubleShootingIssues">Troubleshooting issues</sys:String>
@@ -17,6 +18,7 @@
   <sys:String x:Key="LOCIGDBStartUsingClient">Start using {0} client</sys:String>
   <sys:String x:Key="LOCIGDBImportPlaytime">Import play time</sys:String>
   <sys:String x:Key="LOCIGDBAccountID">Account ID</sys:String>
+  <sys:String x:Key="LOCIGDBGetAccountID">Get account ID</sys:String>
   <sys:String x:Key="LOCIGDBMetadataLanguageLabel">Metadata language:</sys:String>
   <!--IGDB-->
   <sys:String x:Key="LOCIgdbUseScreenshotIfNecessary">Use screenshots if artwork is not available</sys:String>
