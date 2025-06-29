@@ -557,9 +557,23 @@ namespace SteamLibrary
 
             using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
             {
-                var familyGroupInformation = Serialization.FromJson<FamilyGroupInformation>(webClient.DownloadString(string.Format(familyGroupIdUrl, accessToken)));
+                FamilyGroupInformation familyGroupInformation = null;
 
-                if (!familyGroupInformation.response.is_not_member_of_any_group)
+                try
+                {
+                    familyGroupInformation = Serialization.FromJson<FamilyGroupInformation>(webClient.DownloadString(string.Format(familyGroupIdUrl, accessToken)));
+                }
+                catch (WebException e) when (e.Response is HttpWebResponse response)
+                {
+                    if (response.StatusCode == (HttpStatusCode)401)
+                    {
+                        logger.Debug("Steam family sharing API returned 401 Unauthorized, access token likely expired.");
+                        throw new Exception(PlayniteApi.Resources.GetString(LOC.SteamFamilyUnauthorizedError));
+                    }
+                }
+
+
+                if (familyGroupInformation != null && !familyGroupInformation.response.is_not_member_of_any_group)
                 {
                     var stringLibrary = webClient.DownloadString(string.Format(sharedLibraryUrl, accessToken, familyGroupInformation.response.family_groupid, userId))
                         .Replace("\"apps\"", "\"games\"")
@@ -772,9 +786,10 @@ namespace SteamLibrary
                                 }
                             }
                         }
-                        catch
+                        catch (Exception e)
                         {
-                            throw new Exception($"Failed to import family shared games. Check your access token!");
+                            logger.Error(e, "Failed to import family shared games.");
+                            importError = e;
                         }
                     }
                     if (SettingsViewModel.Settings.AdditionalAccounts.HasItems())

@@ -84,5 +84,6 @@
   <sys:String x:Key="LOCSteamImportFamilySharedGames">Import family shared games</sys:String>
   <sys:String x:Key="LOCSteamAccessToken">Access Token</sys:String>
   <sys:String x:Key="LOCSteamNoFamilyGroupError">Cannot import family shared games, not part of any Steam family</sys:String>
+  <sys:String x:Key="LOCSteamFamilyUnauthorizedError">Failed to import family shared games. Your access token has probably expired.</sys:String>
   <sys:String x:Key="LOCSteamWebVsApiLogin">Should I use Web or API login?</sys:String>
 </ResourceDictionary>
