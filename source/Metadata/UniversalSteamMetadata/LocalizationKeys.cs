@@ -341,6 +341,10 @@ namespace System
         /// Cannot import family shared games, not part of any Steam family
         /// </summary>
         public const string SteamNoFamilyGroupError = "LOCSteamNoFamilyGroupError";
+        /// <summary>
+        /// Failed to import family shared games. Your access token has probably expired.
+        /// </summary>
+        public const string SteamFamilyUnauthorizedError = "LOCSteamFamilyUnauthorizedError";
         /// Should I use Web or API login?
         /// </summary>
         public const string SteamWebVsApiLogin = "LOCSteamWebVsApiLogin";
